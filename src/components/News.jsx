@@ -106,7 +106,7 @@ const News = () => {
                 <div className="search-bar">
                     <form onSubmit={handleSearch}>
                         <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-                        <button type='sumbit'>
+                        <button type='submit'>
                             <i className="fa-solid fa-magnifying-glass"></i></button></form></div>
             </header>
             <div className="news-content">
