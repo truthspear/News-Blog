@@ -7,6 +7,7 @@ import NoImg from '../assets/images/no-img.png'
 import axios from 'axios'
 import NewsModel from './NewsModel'
 import Bookmarks from './Bookmarks'
+import { Link } from 'react-router-dom';
 
 const categories = ["general", "world", "business", "technology", "entertainment", "sports", "science", "health", "research-papers"]
 
@@ -108,6 +109,10 @@ const News = () => {
                         <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                         <button type='submit'>
                             <i className="fa-solid fa-magnifying-glass"></i></button></form></div>
+                              <nav className="auth-links">
+                                <Link to="/login" className="auth-link">login</Link>
+                                    <Link to="/register" className="auth-link">register</Link>
+                            </nav>
             </header>
             <div className="news-content">
                 <div className="navbar">
