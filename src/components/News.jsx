@@ -112,6 +112,7 @@ const News = () => {
                               <nav className="auth-links">
                                 <Link to="/login" className="auth-link">login</Link>
                                     <Link to="/register" className="auth-link">register</Link>
+                                        <Link to="/contact" className="auth-link">Contact Us</Link>
                             </nav>
             </header>
             <div className="news-content">
@@ -165,7 +166,7 @@ const News = () => {
                 <Bookmarks show={showBookmarksModel} bookmarks={bookmarks}
                     onClose={() => setShowBookmarksModel(false)}
                     onSelectArticle={handleArticleClick} onDeleteBookmark={handleBookmarkClick} />
-                <div className="my-blogs">My Blogs</div>
+                <div className="my-blogs">My Notes</div>
                 <div className="weather-calendar">
                     <Weather />
                     <Calendar />

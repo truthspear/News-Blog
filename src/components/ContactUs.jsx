@@ -1,71 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { db } from "./firebaseContact";
+import { collection, addDoc } from "firebase/firestore";
+import "./ContactUs.css";
 
-import { db } from "../firebase";
+const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
 
-const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [loader, setLoader] = useState(false);
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoader(true);
+    setIsSubmitting(true);
 
-    db.collection("contacts")
-      .add({
-        name: name,
-        email: email,
-        message: message,
-      })
-      .then(() => {
-        setLoader(false);
-        alert("Your message has been submitted👍");
-      })
-      .catch((error) => {
-        alert(error.message);
-        setLoader(false);
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...formData,
+        createdAt: new Date()
       });
+      alert("Your message has been submitted 👍");
 
-    setName("");
-    setEmail("");
-    setMessage("");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("Error submitting contact form:", err);
+      alert("Failed to submit. Please try again.");
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Contact Us </h1>
+    <div className="contact-container">
+      <h1 className="contact-title">Contact Us</h1>
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          value={formData.name}
+          onChange={handleChange}
+          className="contact-input"
+          placeholder="Your Name"
+        />
 
-      <label>Name</label>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+          className="contact-input"
+          placeholder="Your Email"
+        />
 
-      <label>Email</label>
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          value={formData.message}
+          onChange={handleChange}
+          className="contact-textarea"
+          placeholder="Your Message"
+        />
 
-      <label>Message</label>
-      <textarea
-        placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      ></textarea>
-
-      <button
-        type="submit"
-        style={{ background: loader ? "#ccc" : " rgb(2, 2, 110)" }}
-      >
-        Submit
-      </button>
-    </form>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="contact-button"
+        >
+          {isSubmitting ? "Sending..." : "Submit"}
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default Contact;
+export default ContactUs;
