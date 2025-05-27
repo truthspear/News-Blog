@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 
 const categories = ["general", "world", "business", "technology", "entertainment", "sports", "science", "health", "research-papers"]
 
-
 const News = () => {
     const [headline, setHeadline] = useState(null)
     const [news, setNews] = useState([])
@@ -63,13 +62,10 @@ const News = () => {
 
             const savedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || []
             setBookmarks(savedBookmarks)
-        
-            
         }
 
         fetchNews()
     }, [selectedCategory, searchQuery])
-
 
     const handleCategoryClick = (e, category) => {
         e.preventDefault()
@@ -80,99 +76,120 @@ const News = () => {
         e.preventDefault()
         setSearchQuery(searchInput)
         setSearchInput('')
-
     }
 
     const handleArticleClick = (article) => {
         setSelectedArticle(article)
         setShowModel(true)
-
-        console.log(article)
     }
 
     const handleBookmarkClick = (article) => {
         setBookmarks((prevBookmarks) => {
-            const updatedBookmarks = prevBookmarks.find((bookmark) => bookmark.title === article.title) ? prevBookmarks.filter((bookmark) => bookmark.title !== article.title) : [...prevBookmarks, article]
+            const updatedBookmarks = prevBookmarks.find((bookmark) => bookmark.title === article.title)
+                ? prevBookmarks.filter((bookmark) => bookmark.title !== article.title)
+                : [...prevBookmarks, article]
             localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks))
             return updatedBookmarks
         })
     }
 
-
-
     return (
-        <div className='news'>
-            <header className="news-header">
-                <h1 className="logo">TruthSpear</h1>
-                <div className="search-bar">
-                    <form onSubmit={handleSearch}>
-                        <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-                        <button type='submit'>
-                            <i className="fa-solid fa-magnifying-glass"></i></button></form></div>
-                              <nav className="auth-links">
-                                <Link to="/login" className="auth-link">login</Link>
-                                    <Link to="/register" className="auth-link">register</Link>
-                            </nav>
-            </header>
-            <div className="news-content">
-                <div className="navbar">
-                    <div className="user"><img src={UserImg} alt="User Image" /><p>Mary's Blog</p></div>
-                    <nav className="categories"><h1 className="nav-heading">Categories</h1>
-                        <div className="nav-links">
-                            {categories.map((category) => (<a href="#" key={category} className='nav-link' onClick={(e) => handleCategoryClick(e, category)}>{category}</a>
-                            ))}
-
-
-                            <a href="#" className='nav-link' onClick={() => setShowBookmarksModel(true)}>Bookmarks <i className="fa-solid fa-bookmark"></i></a>
+        <div className="container">
+            <div className="TruthSpear">
+                <div className='news'>
+                    <header className="news-header">
+                        <h1 className="logo">TruthSpear</h1>
+                        <div className="search-bar">
+                            <form onSubmit={handleSearch}>
+                                <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                                <button type='submit'>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
                         </div>
-                    </nav>
+                        <nav className="auth-links">
+                            <Link to="/login" className="auth-link">login</Link>
+                            <Link to="/register" className="auth-link">register</Link>
+                        </nav>
+                    </header>
 
-                </div>
-                <div className="news-section">
-                    {headline && (<div className="headline" onClick={() => handleArticleClick(headline)}>
-                        <img src={headline.image || NoImg} alt={headline.title} />
-                        <h2 className="headline-title">{headline.title}
-                            <i className={`${bookmarks.some((bookmark) => bookmark.title === headline.title) ? 'fa-solid' : 'fa-regular'} fa-bookmark bookmark`}
-                                onClick={(e) => (
-                                    e.stopPropagation(),
-                                    handleBookmarkClick(headline)
-                                )}></i>
-                        </h2>
-                    </div>)}
+                    <div className="news-content">
+                        <div className="navbar">
+                            <div className="user">
+                                <img src={UserImg} alt="User Image" />
+                                <p>Aman's Blog</p>
+                            </div>
+                            <nav className="categories">
+                                <h1 className="nav-heading">Categories</h1>
+                                <div className="nav-links">
+                                    {categories.map((category) => (
+                                        <a href="#" key={category} className='nav-link' onClick={(e) => handleCategoryClick(e, category)}>{category}</a>
+                                    ))}
+                                    <a href="#" className='nav-link' onClick={() => setShowBookmarksModel(true)}>Bookmarks <i className="fa-solid fa-bookmark"></i></a>
+                                </div>
+                            </nav>
+                        </div>
 
-
-                    <div className="news-grid">
-                        {news.map((article, index) => {
-                            const isBookmarked = bookmarks.some((bookmark) => bookmark.url === article.url)
-                            return (
-                                <div key={article.url || index} className="news-grid-item" onClick={() => handleArticleClick(article)}>
-                                    <img src={article.image || NoImg} alt={article.title} />
-                                    <h3>{article.title}
-                                        <i className={`${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark bookmark`}
+                        <div className="news-section">
+                            {headline && (
+                                <div className="headline" onClick={() => handleArticleClick(headline)}>
+                                    <img src={headline.image || NoImg} alt={headline.title} />
+                                    <h2 className="headline-title">{headline.title}
+                                        <i className={`${bookmarks.some((bookmark) => bookmark.title === headline.title) ? 'fa-solid' : 'fa-regular'} fa-bookmark bookmark`}
                                             onClick={(e) => {
                                                 e.stopPropagation()
-                                                handleBookmarkClick(article)
+                                                handleBookmarkClick(headline)
                                             }}></i>
-                                    </h3>
+                                    </h2>
                                 </div>
-                            )
-                        })}
+                            )}
 
+                            <div className="news-grid">
+                                {news.map((article, index) => {
+                                    const isBookmarked = bookmarks.some((bookmark) => bookmark.url === article.url)
+                                    return (
+                                        <div key={article.url || index} className="news-grid-item" onClick={() => handleArticleClick(article)}>
+                                            <img src={article.image || NoImg} alt={article.title} />
+                                            <h3>{article.title}
+                                                <i className={`${isBookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark bookmark`}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        handleBookmarkClick(article)
+                                                    }}></i>
+                                            </h3>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <NewsModel show={showModel} article={selectedArticle} onClose={() => setShowModel(false)} />
+                        <Bookmarks
+                            show={showBookmarksModel}
+                            bookmarks={bookmarks}
+                            onClose={() => setShowBookmarksModel(false)}
+                            onSelectArticle={handleArticleClick}
+                            onDeleteBookmark={handleBookmarkClick}
+                        />
+
+                        <div className="my-blogs">My Notes</div>
+                        <div className="weather-calendar">
+                            <Weather />
+                            <Calendar />
+                        </div>
                     </div>
 
-                </div>
-                <NewsModel show={showModel} article={selectedArticle} onClose={() => setShowModel(false)} />
-                <Bookmarks show={showBookmarksModel} bookmarks={bookmarks}
-                    onClose={() => setShowBookmarksModel(false)}
-                    onSelectArticle={handleArticleClick} onDeleteBookmark={handleBookmarkClick} />
-                <div className="my-blogs">My Blogs</div>
-                <div className="weather-calendar">
-                    <Weather />
-                    <Calendar />
-                </div>
-            </div>
-            <footer className="news-footer">Footer</footer>
-        </div>
+                    <footer className="news-footer">
+                        <p><span>News & Blogs App</span></p>
+                        <p>
+                            <a href="https://www.copyright.gov.in/Documents/Copyrightrules1957.pdf" target="_blank" rel="noopener noreferrer">
+                                &copy; All rights Reserved. By TruthSpear
+                            </a>
+                        </p>
+                    </footer>
+                </div> 
+            </div> 
+        </div>     
     )
 }
 
