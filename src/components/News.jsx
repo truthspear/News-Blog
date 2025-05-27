@@ -117,7 +117,7 @@ const News = () => {
             </header>
             <div className="news-content">
                 <div className="navbar">
-                    <div className="user"><img src={UserImg} alt="User Image" /><p>Mary's Blog</p></div>
+                    <div className="user"><img src={UserImg} alt="User Image" /><p>Aman's Blog</p></div>
                     <nav className="categories"><h1 className="nav-heading">Categories</h1>
                         <div className="nav-links">
                             {categories.map((category) => (<a href="#" key={category} className='nav-link' onClick={(e) => handleCategoryClick(e, category)}>{category}</a>
