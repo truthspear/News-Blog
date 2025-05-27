@@ -263,3 +263,26 @@
     background-color: #111214;
     border-radius: 0 0 1rem 1rem;
 }
+
+.news-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.auth-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-link {
+  color: white; /* or your theme color */
+  text-transform: lowercase;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
