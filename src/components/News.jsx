@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const categories = ["general", "world", "business", "technology", "entertainment", "sports", "science", "health", "research-papers"]
 
-const News = () => {
+const News = ({onShowBlogs}) => {
     const [headline, setHeadline] = useState(null)
     const [news, setNews] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('general')
@@ -117,7 +117,7 @@ const News = () => {
 
                     <div className="news-content">
                         <div className="navbar">
-                            <div className="user">
+                            <div className="user" onClick={onShowBlogs}>
                                 <img src={UserImg} alt="User Image" />
                                 <p>Aman's Blog</p>
                             </div>
