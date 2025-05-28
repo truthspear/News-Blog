@@ -111,6 +111,7 @@ const News = () => {
                             <Link to="/login" className="auth-link">login</Link>
                             <Link to="/register" className="auth-link">register</Link>
                             <Link to="/contact" className="auth-link">contact us</Link>
+                            <Link to="/about" className="auth-link">about us</Link>
                         </nav>
                     </header>
 
@@ -188,9 +189,9 @@ const News = () => {
                             </a>
                         </p>
                     </footer>
-                </div> 
-            </div> 
-        </div>     
+                </div>
+            </div>
+        </div>
     )
 }
 
