@@ -72,3 +72,13 @@ body {
 .register-button:hover {
   background-color: #218838;
 }
+
+@media (max-width: 500px) {
+  .register-form {
+    padding: 24px;
+  }
+
+  .register-title {
+    font-size: 20px;
+  }
+}

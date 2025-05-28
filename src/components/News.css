@@ -106,6 +106,11 @@
 }
 
 .categories {
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    scrollbar-width: none;
+    /* Firefox */
     width: 100%;
     border-radius: 1rem;
     background-color: #111214;
@@ -114,6 +119,12 @@
     flex-direction: column;
     row-gap: 2rem;
     padding: 2rem;
+    scroll-behavior: smooth;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .nav-heading {
@@ -269,24 +280,25 @@
 }
 
 .news-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .auth-links {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .auth-link {
-  color: white; /* or your theme color */
-  text-transform: lowercase;
-  text-decoration: none;
-  font-weight: 600;
+    color: white;
+    /* or your theme color */
+    text-transform: lowercase;
+    text-decoration: none;
+    font-weight: 600;
 }
 
 .auth-link:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
