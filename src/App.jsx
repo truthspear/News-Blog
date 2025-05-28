@@ -4,6 +4,10 @@ import Login from './components/login';
 import Register from './components/register';
 import ContactUs from './components/ContactUs';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+import News from './components/News';
+>>>>>>> Stashed changes
 =======
 import News from './components/News';
 >>>>>>> Stashed changes
@@ -18,6 +22,7 @@ const App = () => {
       <div className="container">
         <div className="TruthSpear">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <Routes>
               <Route path="/about" element={<AboutUs />} />
               <Route path="/" element={<News />} /> 
@@ -27,6 +32,8 @@ const App = () => {
               <Route path="/news-blogs" element={<Blogs />} />
             </Routes>
 =======
+=======
+>>>>>>> Stashed changes
           {view === 'news' && <News onShowBlogs={() => setView('blogs')} />}
           {view === 'blogs' && <Blogs onBack={() => setView('news')} />}
           
@@ -35,6 +42,9 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactUs />} />
           </Routes>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         </div>
       </div>
