@@ -1,63 +1,122 @@
+/* AboutUs.css - Large Text + Hidden Scrollbar + Dark Theme */
+
 .about-page {
-  min-height: 100vh;
-  background-color: #0B0C0F;
-  color: white;
-  padding: 2rem;
-  font-family: sans-serif;
-  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 
+/* Hide scrollbar - Chrome, Edge, Safari */
+.about-page::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbar - Firefox */
+.about-page {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Title */
 .about-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 3.2rem;
+  color: #ffffff;
+  font-weight: 800;
+  margin: 2rem 0 1.8rem;
+  position: relative;
 }
 
+.about-title::after {
+  content: "";
+  width: 70px;
+  height: 5px;
+  background-color: #8A2BE2;
+  display: block;
+  margin: 0.8rem auto 0;
+  border-radius: 4px;
+}
+
+/* Sections */
+.about-section {
+  background: #1e1e1e;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  padding: 2.5rem;
+  margin-bottom: 2.8rem;
+}
+
+.about-section h2 {
+  color: #8A2BE2;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-section p,
+.about-section li {
+  font-size: 1.4rem;
+  color: #dddddd;
+  line-height: 1.9;
+}
+
+.about-section ul {
+  padding-left: 2rem;
+}
+
+/* Team Section */
 .team-grid {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .team-card {
-  background-color: #111214;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-  width: 100%;
-  max-width: 280px;
+  background-color: #1e1e1e;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
 }
 
 .team-photo {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 50%;
   margin-bottom: 1rem;
+  border: 3px solid #8A2BE2;
 }
 
 .team-card h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin: 0.6rem 0;
 }
 
 .team-card p {
-  font-size: 0.9rem;
-  color: #bbb;
-  margin-bottom: 0.5rem;
+  color: #bbbbbb;
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
 }
 
 .team-card a {
-  font-size: 0.85rem;
-  color: #42a5f5;
+  color: #8A2BE2;
   text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .team-card a:hover {
