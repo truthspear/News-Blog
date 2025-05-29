@@ -51,20 +51,26 @@
     transform: translateY(.2rem);
 }
 
+
 .blogs-right-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 5rem;
+    row-gap: 3rem; /* Reduced from 5rem to 3rem for more vertical space */
 }
 
 .blogs-right-form h1{
     font-family: "Comfortaa",sans-serif;
-    font-size: clamp(2rem,5cqi,6rem);
+    /* Adjusted clamp values. Increased min, slightly reduced max for better control. */
+    font-size: clamp(2.5rem, 5vw, 5rem); /* Switched from cqi to vw for more consistent scaling based on viewport width */
     text-transform: uppercase;
     background: linear-gradient(to right, #b88efc, #6677f4 );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center; /* Center the text to prevent overflow on edges */
+    white-space: nowrap; /* Prevent text from wrapping, forcing it onto one line */
+    overflow: hidden; /* Hide any overflow if nowrap still causes issues (though it shouldn't if font-size is good) */
+    text-overflow: ellipsis; /* Add ellipsis if text is cut off (mostly for very small screens) */
 }
 
 .blogs-right-form form{

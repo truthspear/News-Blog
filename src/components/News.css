@@ -394,3 +394,89 @@
 .auth-link:hover {
     text-decoration: underline;
 }
+
+.blog-post .post-button {
+    /* Your existing styles for hover visibility etc. */
+    /* Ensure it's positioned correctly to not overlap too much */
+}
+
+.button-delete-post { /* General styling for delete buttons */
+    background-color: rgba(231, 76, 60, 0.7); /* Reddish, semi-transparent */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    width: 30px; /* Adjust size */
+    height: 30px; /* Adjust size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    padding: 0; /* Remove padding if using fixed size and centering icon */
+}
+
+.button-delete-post:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.button-delete-post i { /* Styling for the icon inside */
+    font-size: 1rem; /* Adjust icon size */
+    line-height: 1; /* Helps with vertical alignment of icon */
+}
+
+/* Ensure .blog-posts displays items correctly if it's empty */
+.my-blogs .blog-posts p { 
+    color: #aaa;
+    text-align: center;
+    padding: 1rem;
+    width: 100%; /* Take full width to center text */
+}
+
+
+.button-edit-post { /* Styling for edit buttons */
+    background-color: rgba(52, 152, 219, 0.7); /* Bluish, semi-transparent */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    padding: 0;
+}
+
+.button-edit-post:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.button-edit-post i {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Adjust .post-button in .blog-post if you haven't already,
+   to ensure it's visible on hover and contains both buttons.
+   The inline style `display: 'flex', gap: '0.5rem'` on the div
+   with class `post-button` in News.jsx handles this for now.
+   For cleaner code, move these to your CSS for `.post-button`
+   within the `.blog-post` context.
+*/
+.blog-post .post-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex; /* For horizontal layout of buttons */
+    gap: 0.5rem; /* Space between buttons */
+    z-index: 3;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.blog-post:hover .post-button {
+    opacity: 1;
+    visibility: visible;
+}
