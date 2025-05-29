@@ -3,15 +3,12 @@ import Weather from './Weather'
 import Calendar from './Calendar'
 import './News.css'
 import UserImg from '../assets/images/user.jpg'
-<<<<<<< Updated upstream
 import NoImg from '../assets/images/research logo.jpg'
-=======
-import NoImg from '../assets/images/no-img.png'
 import blogImg1 from '../assets/images/blog1.jpg'
 import blogImg2 from '../assets/images/blog2.jpg'
 import blogImg3 from '../assets/images/blog3.jpg'
 import blogImg4 from '../assets/images/blog4.jpg'
->>>>>>> Stashed changes
+
 import axios from 'axios'
 import NewsModel from './NewsModel'
 import Bookmarks from './Bookmarks'
