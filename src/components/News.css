@@ -256,7 +256,99 @@
     height: 100%;
     border-radius: 1rem;
     background-color: #111214;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+    padding-bottom: 2rem; 
 }
+
+.my-blogs-heading {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: #dddddd;
+    letter-spacing: 0.1rem;
+    padding: 2rem;
+
+}
+
+.blog-posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 1.2rem;
+
+}
+.blog-post {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+    border-radius: 1rem;
+    flex: 0 1 calc(50% - 0.6rem);
+}
+
+.blog-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    display: block;
+}
+
+.blog-post h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 1.2rem;
+    z-index: 2;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.post-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.4rem;
+    z-index: 3; /* Make sure it’s above image and h3 */
+}
+
+
+
+
+.post-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: center;
+    column-gap: 3rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+
+}
+
+.blog-post:hover .post-button {
+    opacity: 1;
+    visibility: visible;
+    
+}
+    
+
+.post-button button {
+    background-color: transparent;
+    border: none;
+    font-size: 2.5rem;
+    color: #ffffff;
+    cursor: pointer;
+}
+    
 
 .weather-calendar {
     flex: 1;

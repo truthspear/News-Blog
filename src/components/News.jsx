@@ -3,11 +3,20 @@ import Weather from './Weather'
 import Calendar from './Calendar'
 import './News.css'
 import UserImg from '../assets/images/user.jpg'
+<<<<<<< Updated upstream
 import NoImg from '../assets/images/research logo.jpg'
+=======
+import NoImg from '../assets/images/no-img.png'
+import blogImg1 from '../assets/images/blog1.jpg'
+import blogImg2 from '../assets/images/blog2.jpg'
+import blogImg3 from '../assets/images/blog3.jpg'
+import blogImg4 from '../assets/images/blog4.jpg'
+>>>>>>> Stashed changes
 import axios from 'axios'
 import NewsModel from './NewsModel'
 import Bookmarks from './Bookmarks'
 import { Link } from 'react-router-dom';
+
 
 const categories = ["general", "world", "business", "technology", "entertainment", "sports", "science", "health", "research-papers"]
 
@@ -174,7 +183,60 @@ const News = ({onShowBlogs}) => {
                             onDeleteBookmark={handleBookmarkClick}
                         />
 
-                        <div className="my-blogs">My Notes</div>
+                        <div className="my-blogs">
+                            <h1 className="my-blogs-heading">My Blogs</h1>
+                            <div className="blog-posts">
+                                <div className="blog-post">
+                                    <img src={blogImg1} alt="Post Image" />
+                                    <h3>Lorem ipsum dolor sit.</h3>
+                                    <div className="post-button">
+                                        <button className="button-edit-post">
+                                            <i className="bx bxs-edit"></i>
+                                        </button>
+                                        <button className="button-delete-post">
+                                            <i className="bx bxs-x-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="blog-post">
+                                    <img src={blogImg2} alt="Post Image" />
+                                    <h3>Lorem ipsum dolor sit.</h3>
+                                    <div className="post-button">
+                                        <button className="button-edit-post">
+                                            <i className="bx bxs-edit"></i>
+                                        </button>
+                                        <button className="button-delete-post">
+                                            <i className="bx bxs-x-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="blog-post">
+                                    <img src={blogImg3} alt="Post Image" />
+                                    <h3>Lorem ipsum dolor sit.</h3>
+                                    <div className="post-button">
+                                        <button className="button-edit-post">
+                                            <i className="bx bxs-edit"></i>
+                                        </button>
+                                        <button className="button-delete-post">
+                                            <i className="bx bxs-x-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="blog-post">
+                                    <img src={blogImg4} alt="Post Image" />
+                                    <h3>Lorem ipsum dolor sit.</h3>
+                                    <div className="post-button">
+                                        <button className="button-edit-post">
+                                            <i className="bx bxs-edit"></i>
+                                        </button>
+                                        <button className="button-delete-post">
+                                            <i className="bx bxs-x-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <div className="weather-calendar">
                             <Weather />
                             <Calendar />
