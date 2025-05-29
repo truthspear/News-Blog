@@ -30,3 +30,107 @@
     color: #ffffff;
     cursor: pointer;
 }
+
+.news-footer {
+    width: 100%;
+    min-height: 7rem; /* Increased height for better spacing */
+    background-color: #111214;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1.5rem 4rem; /* More vertical padding */
+
+    /* Use Flexbox for alignment */
+    display: flex;
+    justify-content: space-between; /* Pushes items to corners */
+    align-items: center; /* Centers items vertically */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens if needed */
+}
+
+.footer-section {
+    display: flex;
+    align-items: center; /* Vertically align content within each section */
+    white-space: nowrap; /* Prevent text from wrapping within a section */
+}
+
+.footer-left {
+    /* This will hold "News & Blogs App" */
+    order: 1; /* Ensures it's first in visual order */
+}
+
+.footer-center {
+    /* This will hold "contact us" and "about us" */
+    order: 2; /* Ensures it's in the middle */
+    flex-grow: 1; /* Allows it to take available space */
+    justify-content: center; /* Center its own children */
+    display: flex;
+}
+
+.footer-right {
+    /* This will hold "© All rights Reserved. By TruthSpear" */
+    order: 3; /* Ensures it's last in visual order */
+    text-align: right; /* Align text to the right within its section */
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem; /* Space out the contact and about links */
+}
+
+.footer-link {
+    color: #dddddd; /* Lighter color for links */
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.4rem; /* Slightly smaller font for footer links */
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+    color: #62b0ff; /* A subtle blue on hover */
+    text-decoration: underline;
+}
+
+.copyright-text {
+    font-size: 1.2rem; /* Smaller, subtle copyright text */
+    color: #999999; /* Greyed out for less prominence */
+    margin: 0; /* Remove default paragraph margin */
+}
+
+.copyright-text a {
+    color: inherit; /* Inherit color from parent (.copyright-text) */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.copyright-text a:hover {
+    color: #bbbbbb; /* Slightly lighter grey on hover */
+}
+
+.truthspear-brand {
+    font-family: "Bebas Neue", sans-serif; /* Keep the brand font */
+    color: #dddddd; /* Distinct color for brand name */
+    font-size: 1.4rem; /* Slightly larger than surrounding text */
+    letter-spacing: 0.1rem;
+}
+
+.app-name {
+    font-size: 1.2rem; /* Adjusted size for clarity */
+    color: #999999; /* Consistent grey for subtle text */
+    margin: 0; /* Remove default margin */
+}
+
+/* Existing header styles (if you want login/register only in header) */
+.news-header .auth-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.news-header .auth-link {
+    color: white;
+    text-transform: lowercase;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.news-header .auth-link:hover {
+    text-decoration: underline;
+}

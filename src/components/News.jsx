@@ -18,7 +18,7 @@ const News = ({ onShowBlogs }) => {
     const [selectedCategory, setSelectedCategory] = useState('general');
     const [searchInput, setSearchInput] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    
+
     const [showNewsModel, setShowNewsModel] = useState(false);
     const [selectedArticleForModel, setSelectedArticleForModel] = useState(null);
 
@@ -131,7 +131,7 @@ const News = ({ onShowBlogs }) => {
         <div className="container">
             <div className="TruthSpear">
                 <div className='news'>
-                    {/* Header remains the same */}
+                    {/* Header: Removed Contact Us and About Us links */}
                     <header className="news-header">
                         <h1 className="logo">TruthSpear</h1>
                         <div className="search-bar">
@@ -140,11 +140,10 @@ const News = ({ onShowBlogs }) => {
                                 <button type='submit'><i className="fa-solid fa-magnifying-glass"></i></button>
                             </form>
                         </div>
+                        {/* Only Login/Register remain here */}
                         <nav className="auth-links">
                             <Link to="/login" className="auth-link">login</Link>
                             <Link to="/register" className="auth-link">register</Link>
-                            <Link to="/contact" className="auth-link">contact us</Link>
-                            <Link to="/about" className="auth-link">about us</Link>
                         </nav>
                     </header>
 
@@ -189,16 +188,16 @@ const News = ({ onShowBlogs }) => {
                                         </h3>
                                     </div>
                                 ))}
-                                {news.length === 0 && !headline && <p style={{color: '#aaa', textAlign: 'center'}}>No articles found.</p>}
+                                {news.length === 0 && !headline && <p style={{ color: '#aaa', textAlign: 'center' }}>No articles found.</p>}
                             </div>
                         </div>
-                        
+
                         <NewsModel
                             show={showNewsModel}
                             article={selectedArticleForModel}
                             onClose={() => setShowNewsModel(false)}
                         />
-                        
+
                         <Bookmarks
                             show={showBookmarksModel}
                             bookmarks={bookmarks}
@@ -214,28 +213,25 @@ const News = ({ onShowBlogs }) => {
                                     <div key={blog.id} className="blog-post" onClick={() => handleArticleOrBlogClick(blog)}>
                                         <img src={blog.image || NoImg} alt={blog.title || "Blog post image"} />
                                         <h3>{blog.title}</h3>
-                                        <div className="post-button" style={{top: '0.5rem', right: '0.5rem', zIndex: 5, display: 'flex', gap: '0.5rem' }}>
+                                        <div className="post-button">
                                             <button
-                                                className="button-edit-post" // Use this class for styling
+                                                className="button-edit-post"
                                                 onClick={(e) => handleEditLocalBlog(blog.id, e)}
                                                 title="Edit Blog Post"
-                                                // Style similarly to delete button or define in CSS
-                                                style={{ background: 'rgba(52, 152, 219, 0.7)', borderRadius:'50%', padding: '0.3rem 0.5rem' }}
                                             >
-                                                <i className="bx bxs-edit-alt" style={{fontSize: '1.2rem', color: 'white'}}></i>
+                                                <i className="bx bxs-edit-alt"></i>
                                             </button>
                                             <button
                                                 className="button-delete-post"
                                                 onClick={(e) => handleDeleteLocalBlog(blog.id, e)}
                                                 title="Delete Blog Post"
-                                                style={{ background: 'rgba(255,0,0,0.5)', borderRadius:'50%', padding: '0.3rem 0.5rem' }}
                                             >
-                                                <i className="bx bxs-trash" style={{fontSize: '1.2rem', color: 'white'}}></i>
+                                                <i className="bx bxs-trash"></i>
                                             </button>
                                         </div>
                                     </div>
                                 )) : (
-                                    <p style={{color: '#aaa', textAlign: 'center', padding: '1rem'}}>No blogs created yet. Click on "Aman's Blog" to write one!</p>
+                                    <p style={{ color: '#aaa', textAlign: 'center', padding: '1rem' }}>No blogs created yet. Click on "Aman's Blog" to write one!</p>
                                 )}
                             </div>
                         </div>
@@ -247,14 +243,24 @@ const News = ({ onShowBlogs }) => {
                         </div>
                     </div>
 
-                    {/* Footer remains the same */}
+                    {/* Footer - Modified */}
                     <footer className="news-footer">
-                        <p><span>News & Blogs App</span></p>
-                        <p>
-                            <a href="https://www.copyright.gov.in/Documents/Copyrightrules1957.pdf" target="_blank" rel="noopener noreferrer">
-                                &copy; All rights Reserved. By TruthSpear
-                            </a>
-                        </p>
+                        <div className="footer-section footer-left">
+                            <p className="app-name">News & Blogs App</p>
+                        </div>
+                        <div className="footer-section footer-center">
+                            <div className="footer-links">
+                                <Link to="/contact" className="footer-link">contact us</Link>
+                                <Link to="/about" className="footer-link">about us</Link>
+                            </div>
+                        </div>
+                        <div className="footer-section footer-right">
+                            <p className="copyright-text">
+                                <a href="https://www.copyright.gov.in/Documents/Copyrightrules1957.pdf" target="_blank" rel="noopener noreferrer">
+                                    &copy; All rights Reserved. By <span className="truthspear-brand">TruthSpear</span>
+                                </a>
+                            </p>
+                        </div>
                     </footer>
                 </div>
             </div>
