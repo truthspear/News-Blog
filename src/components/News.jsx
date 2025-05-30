@@ -4,11 +4,12 @@ import Calendar from './Calendar';
 import './News.css';
 import UserImg from '../assets/images/user.jpg';
 import NoImg from '../assets/images/research logo.jpg';
-import './Logout'
+import AppLogo from '../assets/images/TruthSpear LOGO.jpg'; // Imported your logo
+import './Logout'; // Assuming this is a component or CSS import
 import axios from 'axios';
 import NewsModel from './NewsModel';
 import Bookmarks from './Bookmarks';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
 const categories = ["general", "world", "business", "technology", "entertainment", "sports", "science", "health", "research-papers"];
 
@@ -26,13 +27,11 @@ const News = ({ onShowBlogs }) => {
     const [showBookmarksModel, setShowBookmarksModel] = useState(false);
 
     const [localBlogs, setLocalBlogs] = useState([]);
-    const navigate = useNavigate(); // For navigation to edit page
+    const navigate = useNavigate();
 
-    // State for hamburger menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
-        // ... (your existing news fetching logic - no changes here) ...
         const fetchNews = async () => {
             let fetchedNews = [];
             if (selectedCategory === 'research-papers') {
@@ -56,9 +55,9 @@ const News = ({ onShowBlogs }) => {
                 }
             } else {
                 try {
-                    let url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=02ecef516ab0abfedc532fa1861dc788`;
+                    let url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=6d49ce918f089b345fe17f82caf0e993`;
                     if (searchQuery) {
-                        url = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=en&apikey=02ecef516ab0abfedc532fa1861dc788`;
+                        url = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=en&apikey=6d49ce918f089b345fe17f82caf0e993`;
                     }
                     const response = await axios.get(url);
                     fetchedNews = response.data.articles || [];
@@ -93,19 +92,19 @@ const News = ({ onShowBlogs }) => {
         e.preventDefault();
         setSelectedCategory(category);
         setSearchQuery('');
-        setIsMenuOpen(false); // Close menu on category selection
+        setIsMenuOpen(false);
     };
 
     const handleSearch = (e) => {
         e.preventDefault();
         setSearchQuery(searchInput);
-        setIsMenuOpen(false); // Close menu after search (optional, but good for mobile)
+        setIsMenuOpen(false);
     };
 
     const handleArticleOrBlogClick = (item) => {
         setSelectedArticleForModel(item);
         setShowNewsModel(true);
-        setIsMenuOpen(false); // Close menu when an article is opened
+        setIsMenuOpen(false);
     };
 
     const handleBookmarkClick = (article) => {
@@ -129,12 +128,11 @@ const News = ({ onShowBlogs }) => {
     };
 
     const handleEditLocalBlog = (blogIdToEdit, event) => {
-        event.stopPropagation(); // Prevent opening the modal
+        event.stopPropagation();
         navigate(`/edit-blog/${blogIdToEdit}`);
-        setIsMenuOpen(false); // Close menu when navigating to edit
+        setIsMenuOpen(false);
     };
 
-    // Toggle function for hamburger menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -144,28 +142,32 @@ const News = ({ onShowBlogs }) => {
             <div className="TruthSpear">
                 <div className='news'>
                     <header className="news-header">
-                        <h1 className="logo">TruthSpear</h1>
-                        {/* Hamburger menu button */}
+                        <div className="header-left"> {/* Container for logo and title */}
+                            <img src={AppLogo} alt="TruthSpear Logo" className="header-app-logo" />
+                            <h1 className="logo-title">TruthSpear</h1> {/* Changed class from 'logo' to 'logo-title' */}
+                        </div>
+
+                        {/* Hamburger menu button - moved for typical layout before search/auth on small screens */}
                         <div className="hamburger-menu" onClick={toggleMenu}>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                         </div>
 
-                        <div className="search-bar">
-                            <form onSubmit={handleSearch}>
-                                <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-                                <button type='submit'><i className="fa-solid fa-magnifying-glass"></i></button>
-                            </form>
+                        <div className="header-right"> {/* Container for search and auth links */}
+                            <div className="search-bar">
+                                <form onSubmit={handleSearch}>
+                                    <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                                    <button type='submit'><i className="fa-solid fa-magnifying-glass"></i></button>
+                                </form>
+                            </div>
+                            <nav className="auth-links">
+                                <Link to="/logout" className="auth-link">Logout</Link>
+                            </nav>
                         </div>
-                        <nav className="auth-links">
-                        
-                            <Link to="/logout" className="auth-link">Logout</Link>
-                        </nav>
                     </header>
 
                     <div className="news-content">
-                        {/* Apply 'menu-open' class to navbar when menu is open */}
                         <div className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
                             <div className="user" onClick={onShowBlogs} title="Create or View My Blogs">
                                 <img src={UserImg} alt="User" />
@@ -266,6 +268,13 @@ const News = ({ onShowBlogs }) => {
                             <div className="footer-links">
                                 <Link to="/contact" className="footer-link">contact us</Link>
                                 <Link to="/about" className="footer-link">about us</Link>
+                            </div>
+                            <div className="social-links">
+                                <a href="#" className="social-icon" title="YouTube"><i className="fab fa-youtube"></i></a>
+                                <a href="#" className="social-icon" title="Pinterest"><i className="fab fa-pinterest"></i></a>
+                                <a href="#" className="social-icon" title="Instagram"><i className="fab fa-instagram"></i></a>
+                                <a href="#" className="social-icon" title="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+                                <a href="#" className="social-icon" title="GitHub"><i className="fab fa-github"></i></a>
                             </div>
                         </div>
                         <div className="footer-section footer-right">

@@ -1,12 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom'; // Added useParams
+import React, { useEffect } from 'react'; // Added useEffect for Logout component
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/register';
 import ContactUs from './components/ContactUs';
 import News from './components/News';
-import Blogs from './components/Blogs'; // This will now handle create and edit
+import Blogs from './components/Blogs';
 import AboutUs from './components/AboutUs';
-// Assuming NewsModel and other components are correctly imported where needed
+import Logout from './components/Logout'; // <--- IMPORT THE LOGOUT COMPONENT
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/logout" element={<Logout />} /> {/* <--- ADD THE LOGOUT ROUTE */}
           </Routes>
         </div>
       </div>

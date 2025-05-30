@@ -27,7 +27,7 @@ body {
   background-color: #111214;
   border-radius: 1rem 1rem 0 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Arranges children: header-left, hamburger, header-right */
   align-items: center;
   padding: 0 2rem;
   position: relative;
@@ -35,16 +35,45 @@ body {
   z-index: 10;
 }
 
-.logo {
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between logo image and title text */
+  /* Allow this section to shrink if needed, but prioritize its content */
+  flex-shrink: 1; 
+  min-width: 0; /* Important for flex items that might shrink */
+}
+
+.header-app-logo {
+  height: 3.5rem; /* Adjust size as needed */
+  width: auto;    /* Maintain aspect ratio */
+  flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.logo-title { /* Formerly .logo */
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem); /* Adjusted for balance with image */
   color: #dddddd;
   letter-spacing: 1px;
+  margin: 0; /* Remove default h1 margin */
+  white-space: nowrap; /* Prevent title from wrapping if space is tight */
+  overflow: hidden; /* Hide overflow if it's still too long */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between search bar (when visible) and auth links */
+  flex-shrink: 0; /* Prevent this group from shrinking excessively */
 }
 
 .search-bar {
   position: relative;
-  display: none;
+  display: none; /* Hidden by default, shown in media query for larger screens */
+  /* Allow search bar to take available space if needed, but not excessively */
+  flex-grow: 0; 
+  min-width: 150px; /* Minimum width before it gets too small */
 }
 
 .search-bar input {
@@ -82,26 +111,63 @@ body {
   text-transform: lowercase;
   font-size: 1.4rem;
   transition: opacity 0.2s;
-  min-height: 44px;
+  min-height: 44px; /* For better touch target */
   display: flex;
   align-items: center;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .auth-link:hover {
   opacity: 0.8;
 }
 
-.search-toggle {
+.search-toggle { /* Style for a potential mobile search icon if you re-add it */
   background: none;
   border: none;
   color: #ddd;
   font-size: 2rem;
   cursor: pointer;
-  display: flex;
+  display: flex; /* Hidden by default in 768px+ query, but visible if not overridden */
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+  margin-left: auto; /* Push to the right if it's the only item */
 }
+
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger-menu {
+  display: flex; /* Always visible for mobile/tablet unless overridden by media query */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.5rem;
+  height: 2rem;
+  cursor: pointer;
+  z-index: 101; /* Above navbar */
+  flex-shrink: 0; /* Prevent hamburger from shrinking */
+  /* Add some margin if it feels too close to other elements */
+  /* margin: 0 1rem; */ 
+}
+
+.hamburger-menu .bar {
+  height: 3px;
+  background-color: #dddddd;
+  transition: all 0.3s;
+}
+
+/* Styles for when menu is open */
+.hamburger-menu.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
 
 /* ===== MAIN CONTENT AREA ===== */
 .news-content {
@@ -109,9 +175,9 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem;
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
+  flex: 1; /* Allows content to grow and shrink */
+  min-height: 0; /* Important for flex-items with overflow */
+  overflow: hidden; /* Hide overflow on the main content container */
 }
 
 /* ===== NAVIGATION SIDEBAR ===== */
@@ -137,18 +203,18 @@ body {
 }
 
 .menu-overlay {
-  display: none;
+  display: none; /* Hidden by default */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0,0,0,0.5);
-  z-index: 99;
+  z-index: 99; /* Below navbar, above other content */
 }
 
 .menu-open + .menu-overlay {
-  display: block;
+  display: block; /* Show overlay when menu is open */
 }
 
 .user {
@@ -179,14 +245,14 @@ body {
   background-color: #111214;
   border-radius: 1rem;
   padding: 1.5rem;
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  flex: 1; /* Allows categories to take available space */
+  overflow-y: auto; /* Enable scrolling for many categories */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
 }
 
 .categories::-webkit-scrollbar {
-  display: none;
+  display: none; /* Hide scrollbar for Chrome, Safari, Opera */
 }
 
 .nav-heading {
@@ -211,7 +277,8 @@ body {
   display: flex;
   align-items: center;
   transition: color 0.2s;
-  min-height: 44px;
+  text-decoration: none; /* Ensure no underline */
+  min-height: 44px; /* For better touch target */
 }
 
 .nav-link:hover {
@@ -223,43 +290,15 @@ body {
   margin-left: 1rem;
 }
 
-/* ===== HAMBURGER MENU ===== */
-.hamburger-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 2.5rem;
-  height: 2rem;
-  cursor: pointer;
-  z-index: 101;
-}
-
-.hamburger-menu .bar {
-  height: 3px;
-  background-color: #dddddd;
-  transition: all 0.3s;
-}
-
-.hamburger-menu.active .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger-menu.active .bar:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger-menu.active .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
 
 /* ===== NEWS SECTION ===== */
 .news-section {
-  flex: 1;
+  flex: 1; /* Takes remaining space */
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  min-width: 0;
-  min-height: 0;
+  min-width: 0; /* Important for flex-items to prevent overflow */
+  min-height: 0; /* Important for flex-items with overflow */
 }
 
 .headline {
@@ -267,7 +306,8 @@ body {
   border-radius: 0.8rem;
   position: relative;
   height: 220px;
-  min-height: 0;
+  min-height: 0; /* Allow shrinking */
+  overflow: hidden; /* Ensure content stays within bounds */
 }
 
 .headline img {
@@ -290,15 +330,17 @@ body {
   font-size: 1.8rem;
   color: white;
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bookmark {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
   font-size: 1.8rem;
-  color: #f39c12;
+  color: #f39c12; /* Orange for bookmark icon */
   cursor: pointer;
+  margin-left: 1rem; /* Space between title and icon */
+  flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .news-grid {
@@ -308,14 +350,34 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 0.8rem;
-  min-height: 0;
+  flex: 1; /* Allows grid to take available space */
+  min-height: 0; /* Important for flex-items with overflow */
+  overflow-y: auto; /* Enable scrolling for news grid */
+  scrollbar-width: thin; /* Show scrollbar for Firefox */
+  scrollbar-color: #333 #111; /* Customize scrollbar color for Firefox */
+}
+
+.news-grid::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.news-grid::-webkit-scrollbar-track {
+  background: #1a1b1d; /* Color of the track */
+  border-radius: 4px;
+}
+
+.news-grid::-webkit-scrollbar-thumb {
+  background-color: #333; /* Color of the scrollbar thumb */
+  border-radius: 4px;
+  border: 2px solid #1a1b1d; /* Creates padding around thumb */
 }
 
 .news-grid-item {
   position: relative;
   border-radius: 0.6rem;
   overflow: hidden;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16/9; /* Maintain aspect ratio */
+  cursor: pointer;
 }
 
 .news-grid-item img {
@@ -341,6 +403,9 @@ body {
   font-size: 1.3rem;
   color: white;
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ===== MY BLOGS SECTION ===== */
@@ -364,8 +429,25 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; /* Allows blog posts to take available space */
+  overflow-y: auto; /* Enable scrolling for blog posts */
+  scrollbar-width: thin;
+  scrollbar-color: #333 #111;
+}
+
+.blog-posts::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-posts::-webkit-scrollbar-track {
+  background: #1a1b1d;
+  border-radius: 4px;
+}
+
+.blog-posts::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 4px;
+  border: 2px solid #1a1b1d;
 }
 
 .blog-post {
@@ -373,6 +455,7 @@ body {
   border-radius: 0.6rem;
   overflow: hidden;
   aspect-ratio: 16/9;
+  cursor: pointer;
 }
 
 .blog-post img {
@@ -441,7 +524,7 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  min-height: 0;
+  min-height: 0; /* Allow shrinking */
 }
 
 /* ===== FOOTER STYLES ===== */
@@ -450,18 +533,24 @@ body {
   border-radius: 0 0 0.8rem 0.8rem;
   padding: 1.2rem 2rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack elements vertically by default */
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+.footer-section {
+  /* Common styling for footer sections if needed */
+  text-align: center;
+}
+
+.app-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #eeeeee;
+    margin-bottom: 0.5rem; /* Space below app name */
 }
 
 .footer-links {
@@ -469,6 +558,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 1rem; /* Space below nav links */
 }
 
 .footer-link {
@@ -476,20 +566,61 @@ body {
   text-decoration: none;
   font-size: 1.3rem;
   transition: color 0.2s;
-  min-height: 44px;
+  min-height: 44px; /* For better touch target */
   display: flex;
   align-items: center;
+  text-transform: capitalize;
 }
 
 .footer-link:hover {
   color: white;
 }
 
-.copyright {
+/* Social Media Icons */
+.social-links {
+    display: flex;
+    gap: 1.5rem; /* Space between icons */
+    margin-top: 1rem; /* Space above social links if footer-links are present */
+    justify-content: center; /* Center icons horizontally */
+}
+
+.social-icon {
+    color: #dddddd; /* Default icon color */
+    font-size: 2.2rem; /* Icon size */
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Remove underline for links */
+}
+
+.social-icon:hover {
+    color: #8A2BE2; /* Change color on hover (purple) */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* Specific hover colors for brand recognition (optional) */
+.social-icon .fa-facebook-f:hover { color: #3b5998; }
+.social-icon .fa-twitter:hover { color: #00acee; }
+.social-icon .fa-instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback for browsers that don't support text-fill-color */
+}
+.social-icon .fa-linkedin-in:hover { color: #0077b5; }
+.social-icon .fa-github:hover { color: #6e5494; } /* GitHub's purple shade */
+
+
+.copyright-text {
   color: #aaaaaa;
   font-size: 1.1rem;
   text-align: center;
+  margin-top: 1rem; /* Space above copyright text */
 }
+
+.truthspear-brand {
+    color: #8A2BE2; /* Purple color for the brand name */
+    font-weight: bold;
+}
+
 
 /* ===== MEDIA QUERIES ===== */
 @media (min-width: 480px) {
@@ -497,6 +628,14 @@ body {
     padding: 0 3rem;
   }
   
+  .header-app-logo {
+    height: 3.8rem; /* Slightly larger logo */
+  }
+
+  .logo-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem); 
+  }
+
   .news-grid,
   .blog-posts {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -529,21 +668,32 @@ body {
     background-color: transparent;
   }
   
-  .hamburger-menu,
+  .hamburger-menu, /* Hide hamburger on desktop */
   .menu-overlay,
-  .search-toggle {
+  .search-toggle { /* Hide search toggle if it exists */
     display: none;
   }
   
   .search-bar {
-    display: block;
+    display: block; /* Show search bar on larger screens */
     position: relative;
-    width: 20rem;
+    width: 20rem; /* Or auto, or a flex-grow value */
+    min-width: auto; /* Reset min-width from mobile if needed */
+    flex-grow: 1; /* Allow search bar to grow a bit */
+    max-width: 300px; /* Optional: prevent it from becoming too wide */
   }
   
   .search-bar input {
     width: 100%;
     padding: 0 3.5rem 0 1.5rem;
+  }
+
+  .header-app-logo {
+    height: 4rem; 
+  }
+
+  .logo-title {
+    font-size: clamp(2.8rem, 4vw, 4rem); 
   }
   
   .news-section {
@@ -569,17 +719,38 @@ body {
   }
   
   .weather-calendar {
-    flex: 0 0 26rem;
+    flex: 0 0 26rem; /* Fixed width on larger screens */
   }
   
   .news-footer {
-    flex-direction: row;
+    flex-direction: row; /* Layout in a row on larger screens */
     justify-content: space-between;
     padding: 1.5rem 3rem;
   }
   
-  .footer-content {
-    flex-direction: row;
+  .footer-section {
+    /* Reset text alignment for sections in row layout */
+    text-align: left;
+    flex: 1; /* Allow sections to take space */
+  }
+
+  .footer-section.footer-center {
+    display: flex;
+    flex-direction: column; /* Stack links and social icons */
+    align-items: center; /* Center them in the middle section */
+  }
+
+  .footer-links {
+    margin-bottom: 0; /* Remove extra margin */
+  }
+
+  .social-links {
+    margin-top: 0.5rem; /* Adjust space from links */
+  }
+
+  .app-name,
+  .copyright-text {
+      margin-bottom: 0; /* Remove extra margins for single-line content */
   }
 }
 

@@ -4,31 +4,32 @@ import './AboutUs.css'; // Import the CSS file
 const teamMembers = [
   {
     name: 'Atul Kumar Singh',
-    role: 'Frontend Developer',
-    email: 'atul@example.com',
-    image: 'https://ui-avatars.com/api/?name=Aarav+Sharma&background=0D8ABC&color=fff&size=150'
+    
+    email: 'atulksingh501@gmail.com',
+    image: 'src/assets/images/atul.jpg'
   },
   {
     name: 'Ujjwal Garg',
-    role: 'Backend Developer',
-    email: 'ujjwal@example.com',
-    image: 'https://ui-avatars.com/api/?name=Diya+Mehta&background=0D8ABC&color=fff&size=150'
+
+    email: 'ujjwal03rocks@gamil.com',
+    image: 'src/assets/images/ujjwal.jpg'
   },
   {
     name: 'Aman Sharma',
-    role: 'UI/UX Designer',
-    email: 'aman@example.com',
+    
+    email: 'aman6v@gmail.com',
     image: 'src/assets/images/user.jpg'
   },
   {
     name: 'Niladri Pramanik',
-    role: 'Content Writer',
-    email: 'Niladri@example.com',
-    image: 'https://ui-avatars.com/api/?name=Sneha+Kapoor&background=0D8ABC&color=fff&size=150'
+    
+    email: 'niel.pramanik@gmail.com',
+    image: 'src/assets/images/niladri.jpg'
   }
 ];
 
 export default function AboutUs() {
+  
   return (
     <div className="about-page">
       <h1 className="about-title">About TruthSpear</h1>
