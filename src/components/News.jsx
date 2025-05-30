@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import './News.css';
 import UserImg from '../assets/images/user.jpg';
 import NoImg from '../assets/images/research logo.jpg';
-
+import './Logout'
 import axios from 'axios';
 import NewsModel from './NewsModel';
 import Bookmarks from './Bookmarks';
@@ -159,8 +159,8 @@ const News = ({ onShowBlogs }) => {
                             </form>
                         </div>
                         <nav className="auth-links">
-                            <Link to="/login" className="auth-link">login</Link>
-                            <Link to="/register" className="auth-link">register</Link>
+                        
+                            <Link to="/logout" className="auth-link">Logout</Link>
                         </nav>
                     </header>
 
