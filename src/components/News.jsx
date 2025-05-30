@@ -28,6 +28,9 @@ const News = ({ onShowBlogs }) => {
     const [localBlogs, setLocalBlogs] = useState([]);
     const navigate = useNavigate(); // For navigation to edit page
 
+    // State for hamburger menu
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         // ... (your existing news fetching logic - no changes here) ...
         const fetchNews = async () => {
@@ -53,9 +56,9 @@ const News = ({ onShowBlogs }) => {
                 }
             } else {
                 try {
-                    let url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=6d49ce918f089b345fe17f82caf0e993`;
+                    let url = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=02ecef516ab0abfedc532fa1861dc788`;
                     if (searchQuery) {
-                        url = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=en&apikey=6d49ce918f089b345fe17f82caf0e993`;
+                        url = `https://gnews.io/api/v4/search?q=${searchQuery}&lang=en&apikey=02ecef516ab0abfedc532fa1861dc788`;
                     }
                     const response = await axios.get(url);
                     fetchedNews = response.data.articles || [];
@@ -90,16 +93,19 @@ const News = ({ onShowBlogs }) => {
         e.preventDefault();
         setSelectedCategory(category);
         setSearchQuery('');
+        setIsMenuOpen(false); // Close menu on category selection
     };
 
     const handleSearch = (e) => {
         e.preventDefault();
         setSearchQuery(searchInput);
+        setIsMenuOpen(false); // Close menu after search (optional, but good for mobile)
     };
 
     const handleArticleOrBlogClick = (item) => {
         setSelectedArticleForModel(item);
         setShowNewsModel(true);
+        setIsMenuOpen(false); // Close menu when an article is opened
     };
 
     const handleBookmarkClick = (article) => {
@@ -125,22 +131,33 @@ const News = ({ onShowBlogs }) => {
     const handleEditLocalBlog = (blogIdToEdit, event) => {
         event.stopPropagation(); // Prevent opening the modal
         navigate(`/edit-blog/${blogIdToEdit}`);
+        setIsMenuOpen(false); // Close menu when navigating to edit
+    };
+
+    // Toggle function for hamburger menu
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
     };
 
     return (
         <div className="container">
             <div className="TruthSpear">
                 <div className='news'>
-                    {/* Header: Removed Contact Us and About Us links */}
                     <header className="news-header">
                         <h1 className="logo">TruthSpear</h1>
+                        {/* Hamburger menu button */}
+                        <div className="hamburger-menu" onClick={toggleMenu}>
+                            <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
+                            <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
+                            <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
+                        </div>
+
                         <div className="search-bar">
                             <form onSubmit={handleSearch}>
                                 <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                                 <button type='submit'><i className="fa-solid fa-magnifying-glass"></i></button>
                             </form>
                         </div>
-                        {/* Only Login/Register remain here */}
                         <nav className="auth-links">
                             <Link to="/login" className="auth-link">login</Link>
                             <Link to="/register" className="auth-link">register</Link>
@@ -148,8 +165,8 @@ const News = ({ onShowBlogs }) => {
                     </header>
 
                     <div className="news-content">
-                        {/* Navbar remains the same */}
-                        <div className="navbar">
+                        {/* Apply 'menu-open' class to navbar when menu is open */}
+                        <div className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
                             <div className="user" onClick={onShowBlogs} title="Create or View My Blogs">
                                 <img src={UserImg} alt="User" />
                                 <p>Aman's Blog</p>
@@ -160,12 +177,11 @@ const News = ({ onShowBlogs }) => {
                                     {categories.map((category) => (
                                         <a href="#" key={category} className={`nav-link ${selectedCategory === category ? 'active' : ''}`} onClick={(e) => handleCategoryClick(e, category)}>{category}</a>
                                     ))}
-                                    <a href="#" className='nav-link' onClick={() => setShowBookmarksModel(true)}>Bookmarks <i className="fa-solid fa-bookmark"></i></a>
+                                    <a href="#" className='nav-link' onClick={() => { setShowBookmarksModel(true); setIsMenuOpen(false); }}>Bookmarks <i className="fa-solid fa-bookmark"></i></a>
                                 </div>
                             </nav>
                         </div>
 
-                        {/* News Section remains the same */}
                         <div className="news-section">
                             {headline && (
                                 <div className="headline" onClick={() => handleArticleOrBlogClick(headline)}>
@@ -236,14 +252,12 @@ const News = ({ onShowBlogs }) => {
                             </div>
                         </div>
 
-                        {/* Weather/Calendar remains the same */}
                         <div className="weather-calendar">
                             <Weather />
                             <Calendar />
                         </div>
                     </div>
 
-                    {/* Footer - Modified */}
                     <footer className="news-footer">
                         <div className="footer-section footer-left">
                             <p className="app-name">News & Blogs App</p>

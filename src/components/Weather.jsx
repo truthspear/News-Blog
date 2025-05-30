@@ -1,91 +1,86 @@
-import './Weather.css'
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import './Weather.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Weather = () => {
-  const [data, setData] = useState([])
-  const [location, setLocation] = useState("")
+  const [data, setData] = useState({});
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     const fetchDefaultLocation = async () => {
-      const defaultLocation = "Greater Noida"
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocationlocation}&units=Metric&appid=4162b2367849996832f6be37aa104a24`
-      
-      const response = await axios.get(url)
-      setData(response.data)
+      try {
+        const defaultLocation = "Greater Noida";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=metric&appid=4162b2367849996832f6be37aa104a24`;
+        const response = await axios.get(url);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching default location:", error);
+      }
+    };
+    fetchDefaultLocation();
+  }, []);
 
+  const searchLocation = async () => {
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=4162b2367849996832f6be37aa104a24`;
+      const response = await axios.get(url);
+      setData(response.data);
+      setLocation("");
+    } catch (error) {
+      console.error("Error searching location:", error);
     }
-    fetchDefaultLocation()
-  }, [])
-
-  const search = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=Metric&appid=4162b2367849996832f6be37aa104a24`
-
-    const response = await axios.get(url)
-
-    setData(response.data)
-    setLocation("")
-
-    
-  }
-
-  const handleInputChange = (e) => {
-    setLocation(e.target.value)
-  }
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      search()
+      searchLocation();
     }
-  }
+  };
 
   const getWeatherIcon = (weatherType) => {
-    switch (weatherType) {
-      case 'Clear':
-        return <i className='bx-sun-bright'></i>
-      case 'Clouds':
-        return <i className='bx-cloud'></i>
-      case 'Rain':
-        return <i className='bx-cloud-rain'></i>
-      case 'Snow':
-        return <i className='bx-cloud-snow'></i>
-      case 'Thunderstorm':
-        return <i className='bx-cloud-lightning'></i>
-      case 'Haze':
-      case 'Mist':
-        return <i className='bx-cloud-fog'></i> 
-      default:
-        return <i className='bx-cloud'></i>     
-  }
-}  
+    const iconMap = {
+      'Clear': 'bx bx-sun',
+      'Clouds': 'bx bx-cloud',
+      'Rain': 'bx bx-cloud-rain',
+      'Snow': 'bx bx-cloud-snow',
+      'Thunderstorm': 'bx bx-cloud-lightning',
+      'Haze': 'bx bx-cloud-fog',
+      'Mist': 'bx bx-cloud-fog',
+    };
+    return <i className={iconMap[weatherType] || 'bx bx-cloud'}></i>;
+  };
 
   return (
     <div className="weather">
-      <div className="search">
-        <div className="search-top">
-          <div className="location-group">
-            <div className="location-line">
-              <i className="fa-solid fa-location-dot"></i>
-              <div className="location">{data.name}</div>
+      <div className="location-row">
+        <i className="bx bx-map location-icon"></i>
+        <h2 className="location-name">{data.name || "Loading..."}</h2>
+      </div>
+
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Enter Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          onKeyDown={handleKeyPress}
+        />
+      </div>
+
+      <div className="weather-data">
+        {data.weather && data.weather[0] && (
+          <>
+            {getWeatherIcon(data.weather[0].main)}
+            <div className="weather-condition">{data.weather[0].main}</div>
+            <div className="temperature">
+              {data.main ? `${Math.round(data.main.temp)}°` : null}
             </div>
-            <div className="search-location">
-              <input type="text" placeholder="Enter Location" value={location} onChange={handleInputChange}
-              onKeyDown={handleKeyPress}/>
-              <i className="fa-solid fa-magnifying-glass" onClick={search}></i>
-            </div>
-          </div>
-        </div>
-
-
-        <div className="weather-data">
-          {data.weather && data.weather[0] && getWeatherIcon(data.weather[0].main)}
-          <div className="weather-type">{data.weather ? data.weather[0].main : null}</div>
-          <div className="temp">{data.main ? `${Math.floor(data.main.temp)}°` : null }</div>
-
-        </div>
+          </>
+        )}
       </div>
     </div>
   );
-}
+};
 
-export default Weather
+export default Weather;

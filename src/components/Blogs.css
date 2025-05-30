@@ -167,3 +167,95 @@
 .blogs-close-btn i{
     font-size: 4rem;
 }
+
+/* In blog.css */
+
+@media (max-width: 1024px) { /* Tablet and below */
+    .blogs-left {
+        width: 40%; /* Adjust width or hide if it's purely decorative for form */
+    }
+    .blogs-right {
+        width: 60%;
+    }
+    .blogs-left img {
+        width: 12rem; /* Slightly smaller image */
+        border-width: 0.8rem;
+        right: -6rem; /* Adjust position */
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+  .blogs {
+    flex-direction: column; /* Stack left and right sections */
+    height: auto; /* Allow height to adjust */
+    /* If this 'blogs' view is a modal or full page inside .TruthSpear, 
+       ensure .TruthSpear allows scrolling if content overflows */
+  }
+
+  .blogs-left {
+    width: 100%;
+    height: 20rem; /* Or a fixed height, or aspect-ratio */
+    border-radius: 1rem 1rem 0 0; /* Adjust border-radius */
+    background-position: center center; /* Ensure background image is centered */
+  }
+
+  .blogs-left img {
+    /* This positioning will be tricky. Consider centering it or placing it differently. */
+    width: 10rem;
+    border-width: 0.6rem;
+    position: relative; /* Change from absolute */
+    top: auto;
+    right: auto;
+    transform: none; /* Reset transform */
+    display: block;
+    margin: 1rem auto; /* Center the image */
+    /* Or maybe hide it on mobile if it complicates the layout too much */
+    /* display: none; */
+  }
+
+  .blogs-right {
+    width: 100%;
+    padding: 2rem; /* Add some padding */
+    border-radius: 0 0 1rem 1rem; /* Adjust border-radius if it was part of a single card */
+  }
+  
+  .blogs-right-form {
+      row-gap: 2rem; /* Reduce gap */
+  }
+
+  .blogs-right-form h1 {
+    /* The clamp with vw might be okay, but test it. */
+    font-size: clamp(2rem, 8vw, 3.5rem); /* Adjusted for smaller screens */
+  }
+
+  .blogs-right-form form {
+    row-gap: 2.5rem; /* Reduce gap */
+    width: 100%; /* Ensure form takes full width of its container */
+  }
+  
+  .title-input, 
+  .text-input {
+    /* clamp's cqi unit depends on container. Ensure container has a defined width. */
+    /* For mobile, simpler width might be better */
+    width: 100%; 
+  }
+
+  .post-btn,
+  .submit-btn {
+    width: 100%; /* Make buttons full width */
+    font-size: 1.8rem; /* Adjust font size if needed */
+  }
+  
+  .text-input {
+      aspect-ratio: 4/3; /* Adjust aspect ratio for better vertical space */
+  }
+
+  .blogs-close-btn {
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+  }
+  .blogs-close-btn i {
+    font-size: 3rem;
+  }
+}
