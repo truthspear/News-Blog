@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { auth } from './firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import './login.css'; // ✅ Import your CSS file
+import { useNavigate, Link } from 'react-router-dom'; // ✅ Import Link
+import './login.css'; // Your existing CSS file
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -24,7 +24,7 @@ const Login = () => {
         formData.password
       );
       console.log('User logged in:', userCredential.user);
-      navigate('/');
+      navigate('/'); // Navigate to home or dashboard after login
     } catch (error) {
       setError('Invalid email or password');
     }
@@ -59,7 +59,17 @@ const Login = () => {
 
         <button type="submit" className="login-button">Login</button>
 
-        {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+        {error && <p className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</p>} {/* You can use a class for error styling too */}
+
+        {/* ✅ Added Register Link here */}
+        <div className="register-prompt" style={{ textAlign: 'center', marginTop: '20px' }}> {/* Added a class for easier styling */}
+          <p>
+            New user?{' '}
+            <Link to="/register" className="register-link"> {/* Added a class for the link */}
+              Register
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
