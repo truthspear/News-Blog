@@ -12,7 +12,7 @@ const Logout = () => {
         // ✅ Optional: add logout confirmation delay
         const timer = setTimeout(() => {
             navigate('/login'); // Redirect to login page
-        }, 2000);
+        }, 1000);
 
         return () => clearTimeout(timer); // Cleanup on unmount
     }, [navigate]);

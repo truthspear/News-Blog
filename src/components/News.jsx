@@ -4,8 +4,8 @@ import Calendar from './Calendar';
 import './News.css';
 import UserImg from '../assets/images/user.jpg';
 import NoImg from '../assets/images/research logo.jpg';
-import AppLogo from '../assets/images/TruthSpear LOGO.jpg'; // Imported your logo
-import './Logout'; // Assuming this is a component or CSS import
+import AppLogo from '../assets/images/TruthSpear LOGO.jpg';
+import './Logout';
 import axios from 'axios';
 import NewsModel from './NewsModel';
 import Bookmarks from './Bookmarks';
@@ -142,19 +142,18 @@ const News = ({ onShowBlogs }) => {
             <div className="TruthSpear">
                 <div className='news'>
                     <header className="news-header">
-                        <div className="header-left"> {/* Container for logo and title */}
+                        <div className="header-left">
                             <img src={AppLogo} alt="TruthSpear Logo" className="header-app-logo" />
-                            <h1 className="logo-title">TruthSpear</h1> {/* Changed class from 'logo' to 'logo-title' */}
+                            <h1 className="logo-title">TruthSpear</h1>
                         </div>
 
-                        {/* Hamburger menu button - moved for typical layout before search/auth on small screens */}
                         <div className="hamburger-menu" onClick={toggleMenu}>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
                         </div>
 
-                        <div className="header-right"> {/* Container for search and auth links */}
+                        <div className="header-right">
                             <div className="search-bar">
                                 <form onSubmit={handleSearch}>
                                     <input type="text" placeholder='Search News....' value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
